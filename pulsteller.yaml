@@ -1,0 +1,22 @@
+# Code gebaseerd op Huizebruin/s0tool
+# Bron File : https://github.com/huizebruin/s0tool/tree/main/esphome
+
+substitutions:
+  version: '22-10-22.1'
+  device_description: '$kWh-pulsteller gebaseerd op Huizebruin/s0tool - v{version}'
+  device_name: kWh-pulsteller
+
+esphome:
+  name: ${device_name}
+  comment: '${device_description}'
+  project:
+    name: huizebruin.${name}
+    version: "${vdate}"
+    
+esp8266:
+  board: d1_mini
+  restore_from_flash: true
+  
+dashboard_import:
+  package_import_url: github://EenerNL/kwh-pulsteller/pulsteller.yaml
+
