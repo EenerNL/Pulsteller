@@ -36,15 +36,7 @@ logger:
 #===== BASE CONFIG =====#  END  #==
 
 #===== GLOBAL VARIABLES =====#  BEGIN  #==
-globals:
-  - id: pulse_rate
-    type: int
-    restore_value: yes
-    initial_value: '1000'
-#  - id: meterstand
-#    type: float
-#    restore_value: yes                             # set to 'no' when newer value is lower
-#    initial_value: '0'                             # initial can be set via Home Assistant services
+# not used
 #===== GLOBAL VARIABLES =====#  END  #==
 
 #===== BUTTONS / SETTINGS =====#  BEGIN  #==
@@ -60,13 +52,13 @@ button:
           value: 0
 number:
   - platform: template
-    id: pulse_rate_setting
-    initial_value: ${pulse_rate}
-    on_value:
-      then:
-        - globals.set:
-            id: pulse_rate
-            value: !lambda "return x;"
+    id: pulse_rate
+    name: 'Pulsrate setting'
+    min_value: '1'
+    max_value: '10000'
+    step: '1'
+    restore_value: yes
+    initial_value: '1000'
 #===== BUTTONS / SETTINGS =====#  END  #==
 
 #===== HOME ASSISTANT =====#  BEGIN  #==
