@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta10'
+  version: 'beta11'
   device_description: 'pulsteller - ${version}'
   device_name: 'pulsteller'
 
@@ -41,7 +41,7 @@ globals:
     type: int
     restore_value: yes
     initial_value: '1000'
-#  - id: total_power_usage
+#  - id: meterstand
 #    type: float
 #    restore_value: yes                             # set to 'no' when newer value is lower
 #    initial_value: '0'                             # initial can be set via Home Assistant services
@@ -57,7 +57,16 @@ button:
     on_press:
       - pulse_meter.set_total_pulses:
           id: actual_power
-          value: 0    
+          value: 0
+number:
+  - platform: template
+    id: pulse_rate_setting
+    initial_value: ${pulse_rate}
+    on_value:
+      then:
+        - globals.set:
+            id: pulse_rate
+            value: !lambda "return x;"
 #===== BUTTONS / SETTINGS =====#  END  #==
 
 #===== HOME ASSISTANT =====#  BEGIN  #==
