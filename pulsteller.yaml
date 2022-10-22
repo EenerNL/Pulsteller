@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta17'
+  version: 'beta18'
   device_description: 'pulsteller - ${version}'
   device_name: 'pulsteller'
 
@@ -53,7 +53,7 @@ button:
 number:
   - platform: template
     id: pulse_rate
-    name: 'Pulsrate instelling'
+    name: 'Instelling Pulsrate kWh'
     optimistic: true
     mode: box
     min_value: '1'
@@ -154,8 +154,8 @@ text_sensor:
   - platform: template
     name: 'Versie Pulsteller'                          # displayname in frontend / home assistant
     icon: 'mdi:label-outline'                          # icon type in home assistant
-    update_interval: 1h
-    lambda: return ${version};
+    update_interval: 6h
+    lambda: return {"$version"};
       
   - platform: version
     name: 'Versie ESPHome'                             # displayname in frontend / home assistant
