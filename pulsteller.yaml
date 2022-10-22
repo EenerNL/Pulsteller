@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta10'
+  version: 'beta15'
   device_description: 'pulsteller - ${version}'
   device_name: 'pulsteller'
 
@@ -36,15 +36,7 @@ logger:
 #===== BASE CONFIG =====#  END  #==
 
 #===== GLOBAL VARIABLES =====#  BEGIN  #==
-globals:
-  - id: pulse_rate
-    type: int
-    restore_value: yes
-    initial_value: '1000'
-#  - id: total_power_usage
-#    type: float
-#    restore_value: yes                             # set to 'no' when newer value is lower
-#    initial_value: '0'                             # initial can be set via Home Assistant services
+# not used
 #===== GLOBAL VARIABLES =====#  END  #==
 
 #===== BUTTONS / SETTINGS =====#  BEGIN  #==
@@ -57,7 +49,18 @@ button:
     on_press:
       - pulse_meter.set_total_pulses:
           id: actual_power
-          value: 0    
+          value: 0
+number:
+  - platform: template
+    id: pulse_rate
+    name: 'Pulsrate setting'
+    optimistic: true
+    mode: box
+    min_value: '1'
+    max_value: '10000'
+    step: '1'
+    restore_value: yes
+    initial_value: '1000'
 #===== BUTTONS / SETTINGS =====#  END  #==
 
 #===== HOME ASSISTANT =====#  BEGIN  #==
@@ -87,7 +90,8 @@ sensor:
     device_class: power
     icon: 'mdi:flash'                               # icon type in home assistant
     filters:
-      - multiply: 0.06                              # 1000imp/kwh = 0.06 (default unit is “pulses/min”)
+#      - multiply: 0.06                             # 1000imp/kwh = 0.06 (default unit is “pulses/min”)
+       lambda: return x * (60.0 / id(pulse_rate).state);
     total:
       id: total_power_usage
       name: 'Pulsteller Verbruik sinds online'      # displayname home assistant
@@ -97,7 +101,8 @@ sensor:
       device_class: energy
       icon: 'mdi:flash'                             # icon type in home assistant
       filters:
-        - multiply: 0.001
+#        - multiply: 0.001
+        - lambda: return x * (1.0 / id(pulse_rate).state);
   - platform: total_daily_energy
     name: 'Pulsteller Verbruik vandaag'
     id: daily_power_usage
