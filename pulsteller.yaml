@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta15'
+  version: 'beta16'
   device_description: 'pulsteller - ${version}'
   device_name: 'pulsteller'
 
@@ -81,20 +81,19 @@ time:
 #===== POWER SENSORS =====#  BEGIN  #==
 sensor:
   - platform: pulse_meter
-    pin: D5                                         # connection on board
+    pin: D5
     id: actual_power
-    name: 'Pulsteller Actueel vermogen'             # displayname home assistant
+    name: 'Pulsteller Actueel vermogen'             # displayname in frontend / home assistant
     unit_of_measurement: 'kW'
     accuracy_decimals: 3
     state_class: measurement
     device_class: power
     icon: 'mdi:flash'                               # icon type in home assistant
     filters:
-#      - multiply: 0.06                             # 1000imp/kwh = 0.06 (default unit is “pulses/min”)
        lambda: return x * (60.0 / id(pulse_rate).state);
     total:
       id: total_power_usage
-      name: 'Pulsteller Verbruik sinds online'      # displayname home assistant
+      name: 'Pulsteller Verbruik sinds online'      # displayname in frontend / home assistant
       unit_of_measurement: 'kWh'
       accuracy_decimals: 3
       state_class: total_increasing
@@ -104,11 +103,11 @@ sensor:
 #        - multiply: 0.001
         - lambda: return x * (1.0 / id(pulse_rate).state);
   - platform: total_daily_energy
-    name: 'Pulsteller Verbruik vandaag'
+    name: 'Pulsteller Verbruik vandaag'             # displayname in frontend / home assistant
     id: daily_power_usage
     power_id: actual_power
     unit_of_measurement: 'kWh'
-    icon: mdi:circle-slice-3
+    icon: 'mdi:circle-slice-3'                      # icon type in home assistant
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 3
@@ -119,7 +118,8 @@ sensor:
   - platform: uptime
     name: 'Uptime'
     id: uptime_sensor
-    update_interval: 30s
+    internal: true
+    update_interval: 60s
     on_raw_value:
       then:
         - text_sensor.template.publish:
@@ -142,27 +142,27 @@ sensor:
 text_sensor:
   - platform: wifi_info
     ip_address:
-      name: 'Wi-Fi IP-adres'
+      name: 'Wi-Fi IP-adres'                            # displayname in frontend / home assistant
       icon: mdi:ip-network
     ssid:
-      name: 'Wi-Fi SSID'
+      name: 'Wi-Fi SSID'                                # displayname in frontend / home assistant
       icon: mdi:access-point-network
     mac_address:
-      name: 'Wi-Fi Mac-adres'
+      name: 'Wi-Fi Mac-adres'                           # displayname in frontend / home assistant
       icon: mdi:folder-key-network-outline
       
 #  - platform: template
-#    name: 'pulsteller version'
-#    icon: mdi:label-outline
+#    name: 'Pulsteller Versie'                          # displayname in frontend / home assistant
+#    icon: 'mdi:label-outline'                          # icon type in home assistant
 #    update_interval: 1h
 #    lambda: return ${version};
       
   - platform: version
-    name: "ESPHome Version"
+    name: 'ESPHome Version'                             # displayname in frontend / home assistant
     hide_timestamp: true
 
   - platform: template
-    name: 'Online sinds'
+    name: 'Uptime'                                      # displayname in frontend / home assistant
     id: uptime_human
-    icon: mdi:clock-start
+    icon: 'mdi:clock-start'                             # icon type in home assistant
 #===== UTILITY SENSORS =====#  END  #==
