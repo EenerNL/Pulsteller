@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'v22.10.22-2'
+  version: 'v22.10.22-3'
   device_description: 'kwh-pulsteller - ${version}'
   device_name: 'kwh-pulsteller'
 
