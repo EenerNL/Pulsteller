@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'v22.10.22-3'
+  version: "v22.10.22-3"
   device_description: 'kwh-pulsteller - ${version}'
   device_name: 'kwh-pulsteller'
 
@@ -117,11 +117,11 @@ text_sensor:
       name: 'Mac-adres'
       icon: mdi:folder-key-network-outline
       
-  - platform: template
-    name: 'kWh-pulsteller version'
-    icon: mdi:label-outline
-    update_interval: 24h
-    lambda: return ${version};
+#  - platform: template
+#    name: 'kWh-pulsteller version'
+#    icon: mdi:label-outline
+#    update_interval: 24h
+#    lambda: return ${version};
       
   - platform: version
     name: "ESPHome Version"
