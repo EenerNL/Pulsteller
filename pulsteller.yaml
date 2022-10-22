@@ -1,6 +1,7 @@
-# Code gebaseerd op Huizebruin/s0tool
-# Bron File : https://github.com/huizebruin/s0tool/tree/main/esphome
+# ESPhome-code gebaseerd op code van Huizebruin/s0tool
+# Bron File : https://github.com/huizebruin/s0tool/tree/main/
 
+#===== BASE CONFIG =====#  START  #==
 substitutions:
   version: '22-10-22.1'
   device_description: '$kWh-pulsteller gebaseerd op Huizebruin/s0tool - v{version}'
@@ -20,3 +21,60 @@ esp8266:
 dashboard_import:
   package_import_url: github://EenerNL/kwh-pulsteller/pulsteller.yaml
 
+ota:
+
+wifi:
+  ap:
+    ssid: ${device_name}
+    ap_timeout: 15s
+captive_portal:
+web_server:
+  port: 80
+
+dashboard_import:
+  package_import_url: github://EenerNL/kwh-pulsteller/pulsteller.yaml
+  
+logger:
+  level: DEBUG
+  esp8266_store_log_strings_in_flash: false
+#===== BASE CONFIG =====#  END  #==
+
+#===== HOME ASSISTANT =====#  START  #==
+api:
+  services:
+    - service: adjust_total_kWh
+      variables:
+        total_value: float
+      then:
+        - pulse_meter.set_total_pulses:
+            id: actual_power
+            value: !lambda 'return total_value;'
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+#===== HOME ASSISTANT =====#  END  #==
+
+#===== SENSORS =====#  START  #==
+sensor:
+  - platform: pulse_meter
+    pin: D5                               # connection on board
+    id: actual_power
+    name: 'Actueel vermogen'              # displayname home assistant
+    unit_of_measurement: 'kW'
+    accuracy_decimals: 3
+    state_class: measurement
+    device_class: power
+    icon: 'mdi:flash'                     # icon type in home assistant
+    filters:
+      - multiply: 0.06                    # 1000imp/kwh = 0.06 (default unit is “pulses/min”)
+    total:
+      id: total_power
+      name: 'Totaal verbruik'             # displayname home assistant
+      unit_of_measurement: 'kWh'
+      accuracy_decimals: 2
+      state_class: total_increasing
+      device_class: energy
+      icon: 'mdi:flash'                   # icon type in home assistant
+      filters:
+        - multiply: 0.001
+#===== SENSORS =====#  END  #==
