@@ -97,7 +97,7 @@ sensor:
     icon: 'mdi:flash'                               # icon type in home assistant
     filters:
 #      - multiply: 0.06                             # 1000imp/kwh = 0.06 (default unit is “pulses/min”)
-       lambda: return x * (60.0 / id(pulse_rate))
+       lambda: return x * (60.0 / id(pulse_rate));
     total:
       id: total_power_usage
       name: 'Pulsteller Verbruik sinds online'      # displayname home assistant
@@ -107,7 +107,8 @@ sensor:
       device_class: energy
       icon: 'mdi:flash'                             # icon type in home assistant
       filters:
-        - multiply: 0.001
+#        - multiply: 0.001
+        - lambda: return x * (1.0 / id(pulse_rate));
   - platform: total_daily_energy
     name: 'Pulsteller Verbruik vandaag'
     id: daily_power_usage
