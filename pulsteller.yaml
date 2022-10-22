@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta3'
+  version: 'beta4'
   device_description: 'pulsteller - ${version}'
   device_name: 'pulsteller'
 
@@ -16,10 +16,6 @@ esphome:
   platform: esp8266
   board: d1_mini
   esp8266_restore_from_flash: true
-    
-#esp8266:
-#  board: d1_mini
-#  restore_from_flash: true
   
 dashboard_import:
   package_import_url: github://EenerNL/kwh-pulsteller/pulsteller.yaml
@@ -51,6 +47,13 @@ logger:
 button:  
   - platform: restart
     name: 'Restart device'
+  - platform: template
+    name: "Reset Totaal verbruikt"
+    id: button_reset_total
+    on_press:
+      - pulse_meter.set_total_pulses:
+          id: total_power_usage
+          value: 0    
 #===== BUTTONS / SETTINGS =====#  END  #==
 
 #===== HOME ASSISTANT =====#  BEGIN  #==
@@ -61,7 +64,7 @@ api:
         total_value: float
       then:
         - pulse_meter.set_total_pulses:
-            id: actual_power
+            id: total_power_usage
             value: !lambda 'return total_value;'
 time:
   - platform: homeassistant
@@ -109,13 +112,13 @@ sensor:
 text_sensor:
   - platform: wifi_info
     ip_address:
-      name: 'IP-adres'
+      name: 'Wi-Fi IP-adres'
       icon: mdi:ip-network
     ssid:
-      name: 'SSID'
+      name: 'Wi-Fi SSID'
       icon: mdi:access-point-network
     mac_address:
-      name: 'Mac-adres'
+      name: 'Wi-Fi Mac-adres'
       icon: mdi:folder-key-network-outline
       
 #  - platform: template
