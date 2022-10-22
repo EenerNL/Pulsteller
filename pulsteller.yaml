@@ -56,7 +56,7 @@ button:
 #===== HOME ASSISTANT =====#  BEGIN  #==
 api:
   services:
-    - service: adjust_total_kWh
+    - service: adjust_total_kwh
       variables:
         total_value: float
       then:
