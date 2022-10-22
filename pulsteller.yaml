@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta16'
+  version: 'beta17'
   device_description: 'pulsteller - ${version}'
   device_name: 'pulsteller'
 
@@ -42,7 +42,7 @@ logger:
 #===== BUTTONS / SETTINGS =====#  BEGIN  #==
 button:  
   - platform: restart
-    name: 'Restart device'
+    name: 'Restart Pulsteller'
   - platform: template
     name: "Reset Verbruik sinds online"
     id: button_reset_total
@@ -53,7 +53,7 @@ button:
 number:
   - platform: template
     id: pulse_rate
-    name: 'Pulsrate setting'
+    name: 'Pulsrate instelling'
     optimistic: true
     mode: box
     min_value: '1'
@@ -151,14 +151,14 @@ text_sensor:
       name: 'Wi-Fi Mac-adres'                           # displayname in frontend / home assistant
       icon: mdi:folder-key-network-outline
       
-#  - platform: template
-#    name: 'Pulsteller Versie'                          # displayname in frontend / home assistant
-#    icon: 'mdi:label-outline'                          # icon type in home assistant
-#    update_interval: 1h
-#    lambda: return ${version};
+  - platform: template
+    name: 'Versie Pulsteller'                          # displayname in frontend / home assistant
+    icon: 'mdi:label-outline'                          # icon type in home assistant
+    update_interval: 1h
+    lambda: return ${version};
       
   - platform: version
-    name: 'ESPHome Version'                             # displayname in frontend / home assistant
+    name: 'Versie ESPHome'                             # displayname in frontend / home assistant
     hide_timestamp: true
 
   - platform: template
