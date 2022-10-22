@@ -40,11 +40,11 @@ logger:
 #===== BASE CONFIG =====#  END  #==
 
 #===== GLOBAL VARIABLES =====#  BEGIN  #==
-globals:
-  - id: total_power_usage
-    type: float
-    restore_value: yes                    # set to 'no' when newer value is lower
-    initial_value: '0'                    # initial can be set via Home Assistant services
+#globals:
+#  - id: total_power_usage
+#    type: float
+#    restore_value: yes                    # set to 'no' when newer value is lower
+#    initial_value: '0'                    # initial can be set via Home Assistant services
 #===== GLOBAL VARIABLES =====#  END  #==
 
 #===== BUTTONS / SETTINGS =====#  BEGIN  #==
