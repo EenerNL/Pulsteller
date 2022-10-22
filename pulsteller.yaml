@@ -54,6 +54,7 @@ number:
   - platform: template
     id: pulse_rate
     name: 'Pulsrate setting'
+    optimistic: true
     min_value: '1'
     max_value: '10000'
     step: '1'
