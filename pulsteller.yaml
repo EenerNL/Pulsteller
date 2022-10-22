@@ -52,7 +52,7 @@ button:
     id: button_reset_total
     on_press:
       - pulse_meter.set_total_pulses:
-          id: total_power_usage
+          id: actual_power
           value: 0    
 #===== BUTTONS / SETTINGS =====#  END  #==
 
@@ -64,7 +64,7 @@ api:
         total_value: float
       then:
         - pulse_meter.set_total_pulses:
-            id: total_power_usage
+            id: actual_power
             value: !lambda 'return total_value;'
 time:
   - platform: homeassistant
