@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta7'
+  version: 'beta9'
   device_description: 'pulsteller - ${version}'
   device_name: 'pulsteller'
 
@@ -110,7 +110,7 @@ sensor:
   - platform: uptime
     name: 'Uptime'
     id: uptime_sensor
-    update_interval: 60s
+    update_interval: 30s
     on_raw_value:
       then:
         - text_sensor.template.publish:
