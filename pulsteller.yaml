@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'v22.10.22-1'
+  version: 'v22.10.22-2'
   device_description: 'kwh-pulsteller - ${version}'
   device_name: 'kwh-pulsteller'
 
@@ -13,10 +13,13 @@ esphome:
   project:
     name: EenerNL.${device_name}
     version: "${version}"
-    
-esp8266:
+  platform: esp8266
   board: d1_mini
-  restore_from_flash: true
+  esp8266_restore_from_flash: true
+    
+#esp8266:
+#  board: d1_mini
+#  restore_from_flash: true
   
 dashboard_import:
   package_import_url: github://EenerNL/kwh-pulsteller/pulsteller.yaml
