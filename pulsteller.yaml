@@ -11,7 +11,7 @@ esphome:
   name: ${device_name}
   comment: '${device_description}'
   project:
-    name: EenerNL.${name}
+    name: EenerNL.${device_name}
     version: "${version}"
     
 esp8266:
