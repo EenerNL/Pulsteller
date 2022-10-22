@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta6'
+  version: 'beta7'
   device_description: 'pulsteller - ${version}'
   device_name: 'pulsteller'
 
@@ -107,6 +107,32 @@ sensor:
 #===== POWER SENSORS =====#  END  #==
 
 #===== UTILITY SENSORS =====#  BEGIN  #==
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: 'Wi-Fi IP-adres'
+      icon: mdi:ip-network
+    ssid:
+      name: 'Wi-Fi SSID'
+      icon: mdi:access-point-network
+    mac_address:
+      name: 'Wi-Fi Mac-adres'
+      icon: mdi:folder-key-network-outline
+      
+#  - platform: template
+#    name: 'pulsteller version'
+#    icon: mdi:label-outline
+#    update_interval: 1h
+#    lambda: return ${version};
+      
+  - platform: version
+    name: "ESPHome Version"
+    hide_timestamp: true
+
+  - platform: template
+    name: 'Online sinds'
+    id: uptime_human
+    icon: mdi:clock-start
   - platform: uptime
     name: 'Uptime'
     id: uptime_sensor
@@ -129,25 +155,4 @@ sensor:
                 (minutes ? to_string(minutes) + "m " : "") +
                 (to_string(seconds) + "s")
               ).c_str();
-text_sensor:
-  - platform: wifi_info
-    ip_address:
-      name: 'Wi-Fi IP-adres'
-      icon: mdi:ip-network
-    ssid:
-      name: 'Wi-Fi SSID'
-      icon: mdi:access-point-network
-    mac_address:
-      name: 'Wi-Fi Mac-adres'
-      icon: mdi:folder-key-network-outline
-      
-#  - platform: template
-#    name: 'pulsteller version'
-#    icon: mdi:label-outline
-#    update_interval: 1h
-#    lambda: return ${version};
-      
-  - platform: version
-    name: "ESPHome Version"
-    hide_timestamp: true
 #===== UTILITY SENSORS =====#  END  #==
