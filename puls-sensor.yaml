@@ -4,7 +4,7 @@
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
   version: 'v22.10.22-1'
-  device_description: 'kwh-pulsteller - ${version}'
+  device_description: 'kwh-pulsteller door EenerNL'
   device_name: 'kwh-pulsteller'
 
 esphome:
