@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta12'
+  version: 'beta15'
   device_description: 'pulsteller - ${version}'
   device_name: 'pulsteller'
 
@@ -55,6 +55,7 @@ number:
     id: pulse_rate
     name: 'Pulsrate setting'
     optimistic: true
+    mode: box
     min_value: '1'
     max_value: '10000'
     step: '1'
