@@ -3,16 +3,16 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: '22-10-22.1'
-  device_description: '$kwh-pulsteller - v{version}'
-  device_name: kwh-pulsteller
+  version: 'v22-10-22.1'
+  device_description: 'kwh-pulsteller - ${version}'
+  device_name: 'kwh-pulsteller'
 
 esphome:
   name: ${device_name}
   comment: '${device_description}'
   project:
     name: EenerNL.${name}
-    version: "${vdate}"
+    version: "${version}"
     
 esp8266:
   board: d1_mini
