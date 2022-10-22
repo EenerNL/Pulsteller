@@ -36,7 +36,11 @@ logger:
 #===== BASE CONFIG =====#  END  #==
 
 #===== GLOBAL VARIABLES =====#  BEGIN  #==
-#globals:
+globals:
+  - id: pulse_rate
+    type: int
+    restore_value: yes
+    initial_value: 1000
 #  - id: total_power_usage
 #    type: float
 #    restore_value: yes                             # set to 'no' when newer value is lower
@@ -65,7 +69,7 @@ api:
       then:
         - pulse_meter.set_total_pulses:
             id: actual_power
-            value: !lambda 'return total_value;'
+            value: !lambda 'return total_value * 1000;'
 time:
   - platform: homeassistant
     id: homeassistant_time
