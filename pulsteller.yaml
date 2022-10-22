@@ -121,9 +121,9 @@ text_sensor:
     name: 'kWh-pulsteller version'
     icon: mdi:label-outline
     update_interval: 24h
-    lambda: return '${version}';
+    lambda: return ${version};
       
   - platform: version
-    name: 'ESPHome Version'
+    name: "ESPHome Version"
     hide_timestamp: true
 #===== UTILITY SENSORS =====#  END  #==
