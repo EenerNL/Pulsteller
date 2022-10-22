@@ -40,7 +40,7 @@ globals:
   - id: pulse_rate
     type: int
     restore_value: yes
-    initial_value: 1000
+    initial_value: '1000'
 #  - id: total_power_usage
 #    type: float
 #    restore_value: yes                             # set to 'no' when newer value is lower
