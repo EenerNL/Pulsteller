@@ -4,8 +4,8 @@
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
   version: 'main-v1'
-  device_description: 'pulsteller - ${version}'
-  device_name: 'pulsteller'
+  device_description: 'Pulsteller / ${version}'
+  device_name: 'Pulsteller'
 
 esphome:
   name: ${device_name}
@@ -18,7 +18,7 @@ esphome:
   esp8266_restore_from_flash: true
   
 dashboard_import:
-  package_import_url: github://EenerNL/kwh-pulsteller/pulsteller.yaml
+  package_import_url: github://EenerNL/pulsteller/pulsteller.yaml
 
 ota:
 
