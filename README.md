@@ -1,3 +1,3 @@
-# kwh-pulsteller
+# Pulsteller
 
-Yaml file for s0tool to count kWh pulses.
+Yaml file for s0tool to count energy and water pulses.
