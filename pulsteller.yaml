@@ -1,5 +1,5 @@
-# ESPhome-code gebaseerd op code van Huizebruin/s0tool
-# Bron File : https://github.com/huizebruin/s0tool/tree/main/
+# ESPhome-code based on code from Huizebruin/s0tool en mhendriks/esphome-p1
+# Usable for counting energy and water
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
