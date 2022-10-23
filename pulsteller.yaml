@@ -83,30 +83,30 @@ sensor:
   - platform: pulse_meter
     pin: D5
     id: actual_power
-    name: 'Pulsteller Actueel vermogen'             # displayname in frontend / home assistant
+    name: 'Pulsteller Actueel vermogen'                 # displayname in frontend / home assistant
     unit_of_measurement: 'kW'
     accuracy_decimals: 3
     state_class: measurement
     device_class: power
-    icon: 'mdi:flash'                               # icon type in home assistant
+    icon: 'mdi:flash'                                   # icon type in home assistant
     filters:
        lambda: return x * (60.0 / id(pulse_rate).state);
     total:
       id: total_power_usage
-      name: 'Pulsteller Verbruik sinds online'      # displayname in frontend / home assistant
+      name: 'Pulsteller Verbruik sinds online'         # displayname in frontend / home assistant
       unit_of_measurement: 'kWh'
       accuracy_decimals: 3
       state_class: total_increasing
       device_class: energy
-      icon: 'mdi:flash'                             # icon type in home assistant
+      icon: 'mdi:flash'                                 # icon type in home assistant
       filters:
         - lambda: return x * (1.0 / id(pulse_rate).state);
   - platform: total_daily_energy
-    name: 'Pulsteller Verbruik vandaag'             # displayname in frontend / home assistant
+    name: 'Pulsteller Verbruik vandaag'                 # displayname in frontend / home assistant
     id: daily_power_usage
     power_id: actual_power
     unit_of_measurement: 'kWh'
-    icon: 'mdi:circle-slice-3'                      # icon type in home assistant
+    icon: 'mdi:circle-slice-3'                          # icon type in home assistant
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 3
@@ -114,31 +114,7 @@ sensor:
 #===== POWER SENSORS =====#  END  #==
 
 #===== WATER SENSORS =====#  BEGIN  #==
-  - platform: pulse_counter
-    pin: D2
-    id: actual_water
-    name: 'Waterverbruik actueel'
-    state_class: measurement
-    icon: 'mdi:water'
-    unit_of_measurement: 'liter'
-    accuracy_decimals: 1
-    total:
-      id: total_water_usage
-      name: 'Waterverbruik sinds online'
-      unit_of_measurement: 'm3'
-      accuracy_decimals: 3
-      state_class: total_increasing
-      icon: 'mdi:water'
-      filters:
-        - multiply: 0.001
-  - platform: template
-    name: "Water stromingssnelheid"
-    id: water_flow_rate
-    accuracy_decimals: 1
-    unit_of_measurement: 'l/min'
-    icon: "mdi:water"
-    lambda: return (id(actual_water).state * 10);
-    update_interval: 6s
+# will be added later
 #===== WATER SENSORS =====#  END  #==
 
 #===== UTILITY SENSORS =====#  BEGIN  #==
@@ -179,13 +155,13 @@ text_sensor:
       icon: mdi:folder-key-network-outline
       
   - platform: template
-    name: 'Versie Pulsteller'                          # displayname in frontend / home assistant
-    icon: 'mdi:label-outline'                          # icon type in home assistant
+    name: 'Versie Pulsteller'                           # displayname in frontend / home assistant
+    icon: 'mdi:label-outline'                           # icon type in home assistant
     update_interval: 6h
     lambda: return {"$version"};
       
   - platform: version
-    name: 'Versie ESPHome'                             # displayname in frontend / home assistant
+    name: 'Versie ESPHome'                              # displayname in frontend / home assistant
     hide_timestamp: true
 
   - platform: template
