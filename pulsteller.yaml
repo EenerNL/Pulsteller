@@ -61,6 +61,17 @@ number:
     step: '1'
     restore_value: yes
     initial_value: '1000'
+
+  - platform: template
+    id: pulse_lenght
+    name: 'Instelling Pulslengte in ms'
+    optimistic: true
+    mode: box
+    min_value: '1'
+    max_value: '1000'
+    step: '1'
+    restore_value: yes
+    initial_value: '500'
 #===== BUTTONS / SETTINGS =====#  END  #==
 
 #===== HOME ASSISTANT =====#  BEGIN  #==
@@ -86,6 +97,7 @@ sensor:
     name: 'Pulsteller Actueel vermogen'                 # displayname in frontend / home assistant
     unit_of_measurement: 'kW'
     accuracy_decimals: 3
+    internal_filter: ${pulse_lenght}
     state_class: measurement
     device_class: power
     icon: 'mdi:flash'                                   # icon type in home assistant
