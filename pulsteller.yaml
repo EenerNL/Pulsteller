@@ -96,7 +96,7 @@ sensor:
     name: 'Pulsteller Actueel vermogen'                 # displayname in frontend / home assistant
     unit_of_measurement: 'kW'
     accuracy_decimals: 3
-    internal_filter: '{{id(pulse_lenght).state}}ms'
+    internal_filter: (id(pulse_lenght).state)ms
     state_class: measurement
     device_class: power
     icon: 'mdi:flash'                                   # icon type in home assistant
