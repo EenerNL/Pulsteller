@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta24'
+  version: 'beta25'
   device_description: 'Pulsteller / ${version}'
   device_name: 'Pulsteller'
 
