@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta46'
+  version: 'beta47'
   device_description: 'Pulsteller / ${version}'
   device_name: 'Pulsteller'
 
@@ -176,11 +176,11 @@ sensor:
       accuracy_decimals: 3
       filters:
         - lambda: return x * (1.0 / id(pulse_rate_water).state);
-    - platform: template
-      id: watermeter_pulses
-      name: 'Watermeter totaal pulsen'
-      state_class: 'total_increasing'
-      lambda: return id(watermeter_total_pulses);
+  - platform: template
+    id: watermeter_pulses
+    name: 'Watermeter totaal pulsen'
+    state_class: 'total_increasing'
+    lambda: return id(watermeter_total_pulses);
 #===== WATER SENSORS =====#  END  #==
 
 #===== UTILITY SENSORS =====#  BEGIN  #==
