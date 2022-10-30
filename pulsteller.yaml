@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta44'
+  version: 'beta45'
   device_description: 'Pulsteller / ${version}'
   device_name: 'Pulsteller'
 
@@ -36,11 +36,7 @@ logger:
 #===== BASE CONFIG =====#  END  #==
 
 #===== GLOBAL VARIABLES =====#  BEGIN  #==
-globals:
-  - id: pulse_lenght
-    type: float
-    restore_value: yes
-    initial_value: '50'
+# not used
 #===== GLOBAL VARIABLES =====#  END  #==
 
 #===== BUTTONS / SETTINGS =====#  BEGIN  #==
@@ -65,20 +61,6 @@ number:
     step: 1
     restore_value: yes
     initial_value: '1000'
-  - platform: template
-    id: pulse_lenght_setting
-    name: 'Instelling Pulslengte kWh'
-    optimistic: true
-    mode: box
-    min_value: 1
-    max_value: 100
-    step: 1
-    restore_value: yes
-    on_value:
-      then:
-       - globals.set:
-           id: pulse_lenght
-           value: !lambda 'return pulse_lenght_setting;'
   - platform: template
     id: pulse_rate_water
     name: 'Instelling Pulsrate m3'
@@ -124,9 +106,6 @@ sensor:
     state_class: measurement
     device_class: power
     icon: 'mdi:flash'                                   # icon type in home assistant
-    internal_filter:
-      milliseconds: pulse_lenght
-      #milliseconds: 50
     filters:
       lambda: return x * (60.0 / id(pulse_rate).state);
     total:
