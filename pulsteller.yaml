@@ -121,7 +121,7 @@ sensor:
     device_class: power
     icon: 'mdi:flash'                                   # icon type in home assistant
     internal_filter:
-      milliseconds: int(id(pulse_lenght_setting).state)
+      milliseconds: id(pulse_lenght_setting).state
     filters:
       lambda: return x * (60.0 / id(pulse_rate).state);
     total:
