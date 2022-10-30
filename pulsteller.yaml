@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta29'
+  version: 'beta30'
   device_description: 'Pulsteller / ${version}'
   device_name: 'Pulsteller'
 
@@ -135,13 +135,13 @@ sensor:
 #===== POWER SENSORS =====#  END  #==
 
 #===== WATER SENSORS =====#  BEGIN  #==
-- platform: pulse_counter
+  - platform: pulse_counter
     pin: D2
     update_interval : 6s
     name: "Watermeter puls"
     id: watermeter_pulse
 
-- platform: pulse_meter
+  - platform: pulse_meter
     pin: D2
     name: "Watermeter actueel"
     unit_of_measurement: "liter/min"
