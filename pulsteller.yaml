@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta36'
+  version: 'beta37'
   device_description: 'Pulsteller / ${version}'
   device_name: 'Pulsteller'
 
@@ -60,9 +60,9 @@ number:
     name: 'Instelling Pulsrate kWh'
     optimistic: true
     mode: box
-    min_value: '1'
-    max_value: '4000'
-    step: '1'
+    min_value: 1
+    max_value: 4000
+    step: 1
     restore_value: yes
     initial_value: '1000'
   - platform: template
@@ -70,21 +70,21 @@ number:
     name: 'Instelling Pulslengte kWh'
     optimistic: true
     mode: box
-    min_value: '1'
-    max_value: '100'
-    step: '1'
+    min_value: 1
+    max_value: 100
+    step: 1
     restore_value: yes
-    initial_value: '50'
+    initial_value: 50
   - platform: template
     id: pulse_rate_water
     name: 'Instelling Pulsrate m3'
     optimistic: true
     mode: box
-    min_value: '1'
-    max_value: '1000'
-    step: '1'
+    min_value: 1
+    max_value: 1000
+    step: 1
     restore_value: yes
-    initial_value: '1000'
+    initial_value: 1000
 #===== BUTTONS / SETTINGS =====#  END  #==
 
 #===== HOME ASSISTANT =====#  BEGIN  #==
@@ -121,7 +121,7 @@ sensor:
     device_class: power
     icon: 'mdi:flash'                                   # icon type in home assistant
     internal_filter:
-      milliseconds: float(id(pulse_lenght_setting).state)
+      milliseconds: id(pulse_lenght_setting).state
     filters:
       lambda: return x * (60.0 / id(pulse_rate).state);
     total:
