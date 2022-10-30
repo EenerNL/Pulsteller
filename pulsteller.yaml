@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta42'
+  version: 'beta44'
   device_description: 'Pulsteller / ${version}'
   device_name: 'Pulsteller'
 
@@ -125,7 +125,7 @@ sensor:
     device_class: power
     icon: 'mdi:flash'                                   # icon type in home assistant
     internal_filter:
-      milliseconds: id(pulse_lenght).state
+      milliseconds: pulse_lenght
       #milliseconds: 50
     filters:
       lambda: return x * (60.0 / id(pulse_rate).state);
