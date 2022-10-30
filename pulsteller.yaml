@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta39'
+  version: 'beta40'
   device_description: 'Pulsteller / ${version}'
   device_name: 'Pulsteller'
 
@@ -36,7 +36,11 @@ logger:
 #===== BASE CONFIG =====#  END  #==
 
 #===== GLOBAL VARIABLES =====#  BEGIN  #==
-# not used
+globals:
+  - id: pulse_lenght
+    type: float
+    restore_value: yes
+    initial_value: 50
 #===== GLOBAL VARIABLES =====#  END  #==
 
 #===== BUTTONS / SETTINGS =====#  BEGIN  #==
@@ -62,15 +66,19 @@ number:
     restore_value: yes
     initial_value: '1000'
   - platform: template
-    id: pulse_lenght
+    id: pulse_lenght_setting
     name: 'Instelling Pulslengte kWh'
     optimistic: true
     mode: box
-    min_value: 1.0
-    max_value: 100.0
+    min_value: 1
+    max_value: 100
     step: 1
     restore_value: yes
-    initial_value: 50.0
+    on_value:
+      then:
+       - globals.set:
+           id: pulse_lenght
+           value: !lambda 'return pulse_lenght_setting;'
   - platform: template
     id: pulse_rate_water
     name: 'Instelling Pulsrate m3'
