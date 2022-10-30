@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta40'
+  version: 'beta41'
   device_description: 'Pulsteller / ${version}'
   device_name: 'Pulsteller'
 
@@ -40,7 +40,7 @@ globals:
   - id: pulse_lenght
     type: float
     restore_value: yes
-    initial_value: 50
+    initial_value: '50'
 #===== GLOBAL VARIABLES =====#  END  #==
 
 #===== BUTTONS / SETTINGS =====#  BEGIN  #==
