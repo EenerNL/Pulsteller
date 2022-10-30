@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta37'
+  version: 'beta38'
   device_description: 'Pulsteller / ${version}'
   device_name: 'Pulsteller'
 
@@ -70,11 +70,11 @@ number:
     name: 'Instelling Pulslengte kWh'
     optimistic: true
     mode: box
-    min_value: 1
-    max_value: 100
+    min_value: 1.0
+    max_value: 100.0
     step: 1
     restore_value: yes
-    initial_value: 50
+    initial_value: 50.0
   - platform: template
     id: pulse_rate_water
     name: 'Instelling Pulsrate m3'
