@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta27'
+  version: 'beta29'
   device_description: 'Pulsteller / ${version}'
   device_name: 'Pulsteller'
 
@@ -142,7 +142,7 @@ sensor:
     id: watermeter_pulse
 
 - platform: pulse_meter
-    pin: GPIO12
+    pin: D2
     name: "Watermeter actueel"
     unit_of_measurement: "liter/min"
     icon: "mdi:water"
