@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta31'
+  version: 'beta32'
   device_description: 'Pulsteller / ${version}'
   device_name: 'Pulsteller'
 
@@ -140,6 +140,7 @@ sensor:
     id: watermeter_pulse
     name: 'Watermeter puls'
     state_class: measurement
+    update_interval: 6s
     accuracy_decimals: 1
     icon: 'mdi:water-pump'
     total:
@@ -168,17 +169,8 @@ sensor:
     accuracy_decimals: 1
     unit_of_measurement: 'l/min'
     icon: "mdi:water"
-    lambda: return (id(watermeter_pulse).state);
-    
-  - platform: total_daily_energy
-    name: 'Waterverbruik vandaag'                 
-    id: daily_water_usage
-    power_id: watermeter_pulse
-    unit_of_measurement: 'm³'
-    icon: 'mdi:circle-slice-3'                          
-    state_class: total_increasing
-    accuracy_decimals: 3
-    restore: true
+    lambda: return (id(watermeter_pulse).state * 10);
+    update_interval: 6s
 #===== WATER SENSORS =====#  END  #==
 
 #===== UTILITY SENSORS =====#  BEGIN  #==
