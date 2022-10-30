@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta32'
+  version: 'beta33'
   device_description: 'Pulsteller / ${version}'
   device_name: 'Pulsteller'
 
@@ -66,6 +66,16 @@ number:
     restore_value: yes
     initial_value: '1000'
   - platform: template
+    id: pulse_lenght_setting
+    name: 'Instelling Pulslengte kWh'
+    optimistic: true
+    mode: box
+    min_value: '1'
+    max_value: '100'
+    step: '1'
+    restore_value: yes
+    initial_value: '50'
+  - platform: template
     id: pulse_rate_water
     name: 'Instelling Pulsrate m3'
     optimistic: true
@@ -75,6 +85,9 @@ number:
     step: '1'
     restore_value: yes
     initial_value: '1000'
+    
+pulse_lenght:
+  milliseconds: int(id(pulse_lenght_setting).state)
 #===== BUTTONS / SETTINGS =====#  END  #==
 
 #===== HOME ASSISTANT =====#  BEGIN  #==
@@ -91,8 +104,8 @@ api:
       variables:
         total_value_water: float
       then:
-        - globals.set:
-            id: totalWaterUsage
+        - pulse_meter.set_total_pulses:
+            id: actual_water
             value: !lambda 'return total_value_water;'
 time:
   - platform: homeassistant
@@ -135,42 +148,25 @@ sensor:
 #===== POWER SENSORS =====#  END  #==
 
 #===== WATER SENSORS =====#  BEGIN  #==
-  - platform: pulse_counter
+  - platform: pulse_meter
     pin: D2
-    id: watermeter_pulse
+    id: actual_water
     name: 'Watermeter puls'
     state_class: measurement
-    update_interval: 6s
-    accuracy_decimals: 1
+    device_class: water
+    unit_of_measurement: 'l/min'
+    accuracy_decimals: 0
     icon: 'mdi:water-pump'
     total:
-      id: watermeter_pulse_total
+      id: total_water_usage
       name: 'Watermeter Totaal'
       unit_of_measurement: 'm³'
       state_class: total_increasing
       device_class: water
+      icon: 'mdi:water'
       accuracy_decimals: 3
       filters:
-      - multiply: 0.001
-
-  - platform: template
-    id: watermeter_total
-    name: "Watermeter stand"
-    state_class: "total_increasing"
-    icon: mdi:water
-    unit_of_measurement: m3
-    accuracy_decimals: 3
-    lambda:       
-      return id(watermeter_pulse_total).state + id(totalWaterUsage);
-
-  - platform: template
-    name: 'Waterverbruik actueel'
-    id: watermeter_flow
-    accuracy_decimals: 1
-    unit_of_measurement: 'l/min'
-    icon: "mdi:water"
-    lambda: return (id(watermeter_pulse).state * 10);
-    update_interval: 6s
+        - lambda: return x * (1.0 / id(pulse_rate_water).state);
 #===== WATER SENSORS =====#  END  #==
 
 #===== UTILITY SENSORS =====#  BEGIN  #==
