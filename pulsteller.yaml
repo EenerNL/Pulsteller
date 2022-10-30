@@ -3,7 +3,7 @@
 
 #===== BASE CONFIG =====#  BEGIN  #==
 substitutions:
-  version: 'beta33'
+  version: 'beta34'
   device_description: 'Pulsteller / ${version}'
   device_name: 'Pulsteller'
 
@@ -85,9 +85,6 @@ number:
     step: '1'
     restore_value: yes
     initial_value: '1000'
-    
-pulse_lenght:
-  milliseconds: int(id(pulse_lenght_setting).state)
 #===== BUTTONS / SETTINGS =====#  END  #==
 
 #===== HOME ASSISTANT =====#  BEGIN  #==
@@ -123,8 +120,10 @@ sensor:
     state_class: measurement
     device_class: power
     icon: 'mdi:flash'                                   # icon type in home assistant
+    internal_filter:
+      milliseconds: int(id(pulse_lenght_setting).state)
     filters:
-       lambda: return x * (60.0 / id(pulse_rate).state);
+      lambda: return x * (60.0 / id(pulse_rate).state);
     total:
       id: total_power_usage
       name: 'Pulsteller Verbruik sinds online'         # displayname in frontend / home assistant
